@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Шесть жизненных ситуаций, чтобы заметить свои привычные реакции в денежных вопросах. Мини-тест психолога Натальи Калининской.">
+<title>Что влияет на ваши решения о деньгах?</title>
+<style>
+:root{color-scheme:light;--ink:#292c25;--muted:#555e50;--accent:#325943;--line:#d5dbce;--paper:#fffdf7}
+*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(ellipse at top left,#e4eadb,transparent 65%),#f3eee3;color:var(--ink);font:17px/1.55 system-ui,sans-serif;min-height:100vh}
+main,footer{width:min(100% - 32px,720px);margin:auto}
+main{padding:clamp(30px,8vw,90px) 0 0}
+.brand{color:var(--accent);font-weight:650;margin:0 0 20px}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:24px;padding:clamp(22px,6vw,54px);box-shadow:0 20px 65px #354a2910}
+h1,h2{font-family:Georgia,serif;line-height:1.12;font-weight:normal;letter-spacing:-.035em;margin:0 0 20px}
+h1{font-size:clamp(38px,8vw,65px)}
+h2{font-size:clamp(29px,6vw,45px)}
+p{margin:0 0 18px}
+.meta,footer,small{color:var(--muted);font-size:.9rem}
+footer{padding:24px 0 36px}
+a{color:var(--accent);text-underline-offset:4px}
+button,.primary{font:inherit;font-weight:650;cursor:pointer;border-radius:12px;padding:12px 18px;min-height:48px}
+.primary{display:inline-block;background:var(--accent);color:white;border:1px solid var(--accent);text-decoration:none;text-align:center}
+button:disabled{opacity:.55;cursor:default}
+button.secondary{background:transparent;color:var(--accent);border:1px solid var(--line)}
+:focus-visible{outline:3px solid #9a522a;outline-offset:3px}
+progress{width:100%;height:8px;accent-color:var(--accent);display:block;margin:8px 0 26px}
+fieldset{border:0;padding:0;margin:0 0 22px;min-width:0;display:grid;gap:10px}
+.choice{display:flex;gap:12px;align-items:flex-start;padding:13px;border:1px solid var(--line);border-radius:12px;cursor:pointer}
+.choice:has(:checked){background:#e7efe3;border-color:var(--accent)}
+input{accent-color:var(--accent);flex:none;margin:6px 0 0}
+.actions{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.exercise{padding:18px;background:#e9eee2;border-radius:14px;margin:22px 0}
+.exercise p:last-child{margin-bottom:0}
+</style>
+</head>
+<body>
+<main>
+<p class="brand">Наталья Калининская · интегративный психолог</p>
+<section class="card" id="screen" aria-labelledby="title">
+<p class="meta">6 ситуаций · около 2 минут</p>
+<h1 id="title" tabindex="-1">Что влияет на ваши решения о деньгах?</h1>
+<p>Коллеги зовут в поездку, близкий предлагает разделить расходы, а на карте вдруг больше денег, чем обычно. Посмотрите, какая реакция чаще возникает у вас в такие моменты.</p>
+<p>В конце вы получите разбор своих ответов и небольшое упражнение для следующего решения о деньгах.</p>
+<button class="primary" id="start" type="button">Начать тест</button>
+<noscript><p>Для прохождения теста включите JavaScript в браузере.</p></noscript>
+</section>
+</main>
+<footer><a href="https://t.me/nkpsiholog" rel="noreferrer">Связаться с Натальей</a></footer>
+<script>
+const questions = [
+  ['Подруга зовёт на выходные за город. Вам хочется поехать, а поездка дороже, чем вы рассчитывали.',
+    [['guard','Сразу прикину, сколько останется после поездки. Даже если хватает, мне трудно согласиться.'],
+     ['pleasure','Соглашусь на подъёме. Такие выходные случаются редко, с бюджетом разберусь позже.'],
+     ['delay','Скажу «я подумаю» и, скорее всего, вернусь к этому, когда подруга сама напомнит.']]],
+  ['Вам неожиданно перечислили премию. Что вы сделаете в первые сутки?',
+    [['pleasure','Открою список желаний. Хочется сразу почувствовать, что мои усилия окупились.'],
+     ['delay','Оставлю деньги как есть. Решать, куда их направить, сейчас не хочется.'],
+     ['guard','Переведу большую часть в запас. Так мне спокойнее, даже если хочется себя порадовать.']]],
+  ['Вы с близким человеком договорились поговорить об общих расходах. До разговора час.',
+    [['delay','Поймаю себя на мысли, что сегодня неудобный день. Проще отложить разговор.'],
+     ['guard','Мысленно переберу цифры и возражения. Хочу заранее понять, на что смогу согласиться.'],
+     ['pleasure','Захочу быстрее договориться. Если встреча идёт тепло, могу согласиться на расходы, которых не планировала.']]],
+  ['После тяжёлой недели вы видите вещь, которую давно хотели. Скидка действует до вечера.',
+    [['pleasure','Скорее всего, куплю. Хочется, чтобы сегодня случилось что-нибудь приятное.'],
+     ['guard','Даже если покупка вписывается в бюджет, начну думать, куда ещё могут понадобиться эти деньги.'],
+     ['delay','Закрою вкладку. Разбираться, хочу ли я этого и могу ли себе позволить, сейчас слишком утомительно.']]],
+  ['В середине месяца остаток на карте оказался меньше, чем вы ожидали.',
+    [['guard','Открою историю операций и пересчитаю обязательные расходы. Мне трудно переключиться, пока всё не ясно.'],
+     ['delay','Закрою приложение. Посмотрю расходы позже, когда будет больше сил.'],
+     ['pleasure','Подумаю о том, сколько хорошего было в этих тратах. Сложно захотеть что-то менять, пока радость ещё свежая.']]],
+  ['У вас появилась возможность потратить небольшую свободную сумму только на себя.',
+    [['delay','Пока ничего не выберу. Возможно, через неделю я и не вспомню об этой возможности.'],
+     ['pleasure','Возьму то, что радует прямо сейчас. Когда я в хорошем настроении, выбирать легче.'],
+     ['guard','Скорее оставлю деньги на счёте. Приятно знать, что запас есть, даже если он небольшой.']]]
+];
+
+const profiles = {
+  guard: {
+    title:'Сначала убедиться, что хватит',
+    text:'В ваших ответах чаще звучало стремление заранее проверить запас и понять последствия. Это помогает держать обязательства в поле зрения. Иногда проверка продолжается и после того, как цифры уже ясны, и даже посильную покупку трудно себе разрешить.',
+    step:'Выберите одну посильную покупку для себя. Запишите сумму, которая останется после обязательных расходов и этой покупки. Если остаток вас устраивает, спросите себя: что мне ещё нужно, чтобы принять решение?'
+  },
+  pleasure: {
+    title:'Почувствовать радость сейчас',
+    text:'В ваших ответах чаще звучало желание порадовать себя, отметить усилия или сохранить приятный момент. Вы хорошо замечаете, чего вам хочется. После трудного дня или на подъёме решение может прийти быстрее, чем вы успеете оценить его последствия.',
+    step:'Перед следующей незапланированной покупкой сделайте короткую паузу. Спросите себя, что вам сейчас нужнее всего: сама вещь, отдых, ощущение награды или что-то ещё? Через десять минут вернитесь к выбору.'
+  },
+  delay: {
+    title:'Вернуться к решению позже',
+    text:'В ваших ответах чаще звучало желание взять паузу. Она может помочь, когда у вас мало сил или разговор обещает быть непростым. Если у паузы нет срока, решение остаётся открытым и снова требует внимания.',
+    step:'Возьмите один денежный вопрос, к которому давно собираетесь вернуться. Выберите конкретное время и первый шаг на пять минут: открыть один счёт, записать одну цифру или предложить близкому время для разговора.'
+  }
+};
+
+const screen = document.querySelector('#screen');
+const intro = screen.innerHTML;
+const answers = [];
+let index = 0;
+
+function focusTitle() {
+  document.querySelector('#title').focus();
+}
+
+function rankResponses(responses) {
+  const counts = {guard:0, pleasure:0, delay:0};
+  responses.forEach(answer => { counts[answer] += 1; });
+  const maximum = Math.max(...Object.values(counts));
+  return Object.keys(counts).filter(key => counts[key] === maximum);
+}
+
+function showQuestion() {
+  const [prompt, options] = questions[index];
+  screen.innerHTML = `
+    <p class="meta">Вопрос ${index + 1} из ${questions.length}</p>
+    <progress aria-label="Прогресс теста" value="${index + 1}" max="${questions.length}"></progress>
+    <h2 id="title" tabindex="-1">${prompt}</h2>
+    <form>
+      <fieldset aria-labelledby="title">
+        ${options.map(([key, label]) => `<label class="choice">
+          <input type="radio" name="reaction" value="${key}" ${answers[index] === key ? 'checked' : ''} required>
+          <span>${label}</span>
+        </label>`).join('')}
+      </fieldset>
+      <div class="actions">
+        <button class="secondary" id="back" type="button">Назад</button>
+        <button class="primary" type="submit" ${answers[index] ? '' : 'disabled'}>${index === questions.length - 1 ? 'Показать результат' : 'Дальше'}</button>
+      </div>
+    </form>`;
+  const form = screen.querySelector('form');
+  form.addEventListener('change', event => {
+    answers[index] = event.target.value;
+    form.querySelector('[type=submit]').disabled = false;
+  });
+  form.addEventListener('submit', event => {
+    event.preventDefault();
+    index += 1;
+    if (index === questions.length) showResult();
+    else showQuestion();
+  });
+  screen.querySelector('#back').addEventListener('click', () => {
+    if (index === 0) showIntro();
+    else {
+      index -= 1;
+      showQuestion();
+    }
+  });
+  focusTitle();
+}
+
+function showResult() {
+  const leaders = rankResponses(answers);
+  const profile = profiles[leaders[0]];
+  const mixed = leaders.length > 1;
+  const message = 'Здравствуйте, Наталья! Я прошла тест про деньги и хотела бы узнать, как можно разобрать одну свою ситуацию.';
+  const contact = 'https://t.me/nkpsiholog?text=' + encodeURIComponent(message);
+  screen.innerHTML = `
+    <p class="meta">Ваши привычные реакции</p>
+    <h2 id="title" tabindex="-1">${mixed ? 'Вы реагируете по-разному' : profile.title}</h2>
+    ${mixed
+      ? `<p>В ваших ответах одинаково часто встречались такие реакции:</p>
+         <ul>${leaders.map(key => `<li>${profiles[key].title}</li>`).join('')}</ul>
+         <p>Вспомните один недавний выбор. Какая реакция появилась первой и что вы сделали следом?</p>`
+      : `<p>${profile.text}</p>`}
+    <div class="exercise">
+      <p><strong>Попробуйте в ближайшие дни</strong></p>
+      <p>${mixed ? 'Возьмите одно предстоящее решение о деньгах. Отметьте первую мысль, затем сделайте паузу и спросите себя: «Чего я хочу от этого решения и что мне сейчас поможет его принять?»' : profile.step}</p>
+    </div>
+    <p class="meta">Результат основан на ваших ответах в шести ситуациях. Это упражнение для самонаблюдения.</p>
+    <p><strong>Хотите разобрать одну денежную ситуацию?</strong><br>Напишите Наталье. Можно начать с вопроса о формате встречи, а детали обсудить позже.</p>
+    <div class="actions">
+      <a class="primary" href="${contact}" rel="noreferrer">Написать Наталье в Telegram</a>
+      <button class="secondary" id="restart" type="button">Пройти заново</button>
+    </div>`;
+  screen.querySelector('#restart').addEventListener('click', () => {
+    answers.length = 0;
+    index = 0;
+    showIntro();
+  });
+  focusTitle();
+}
+
+function showIntro() {
+  screen.innerHTML = intro;
+  screen.querySelector('#start').addEventListener('click', showQuestion);
+  focusTitle();
+}
+
+screen.querySelector('#start').addEventListener('click', showQuestion);
+</script>
+</body>
+</html>
